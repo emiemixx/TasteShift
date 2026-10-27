@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TasteShift — Cel</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="panel">
+        <header class="header">
+          <div class="mini-label">
+            <span class="mini-icon">❤</span>
+            <span>Mały krok, dobry kierunek</span>
+          </div>
+
+          <div class="hero-copy">
+            <p class="lead">Jedz tak,</p>
+            <h1>jak chciałbyś się czuć?</h1>
+          </div>
+        </header>
+
+        <section class="meta-block" aria-label="Dane użytkownika">
+          <div class="input-grid">
+            <label class="field">
+              <span>Waga</span>
+              <input type="number" id="weight" placeholder="np. 68" />
+            </label>
+
+            <label class="field">
+              <span>Wzrost</span>
+              <input type="number" id="height" placeholder="np. 170" />
+            </label>
+          </div>
+          <p class="optional-text">Opcjonalne — możesz uzupełnić to później.</p>
+        </section>
+
+        <section class="goal-block" aria-label="Wybierz cel">
+          <div class="goal-list">
+            <button
+              class="goal-card is-selected"
+              type="button"
+              data-goal="schudnąć"
+              data-label="Schudnąć"
+              aria-pressed="true"
+            >
+              <span class="goal-icon">⚖️</span>
+              <span class="goal-copy">
+                <strong>Schudnąć</strong>
+                <small>Chcę czuć się lżej i swobodniej.</small>
+              </span>
+              <span class="goal-check">✓</span>
+            </button>
+
+            <button
+              class="goal-card"
+              type="button"
+              data-goal="przytyć"
+              data-label="Przytyć"
+              aria-pressed="false"
+            >
+              <span class="goal-icon">🥗</span>
+              <span class="goal-copy">
+                <strong>Przytyć</strong>
+                <small>Wolę budować masę i energię.</small>
+              </span>
+              <span class="goal-check">✓</span>
+            </button>
+
+            <button
+              class="goal-card"
+              type="button"
+              data-goal="zdrowiej"
+              data-label="Jeść zdrowiej"
+              aria-pressed="false"
+            >
+              <span class="goal-icon">🌿</span>
+              <span class="goal-copy">
+                <strong>Jeść zdrowiej</strong>
+                <small>To mały krok w lepsze codzienne wybory.</small>
+              </span>
+              <span class="goal-check">✓</span>
+            </button>
+
+            <button
+              class="goal-card"
+              type="button"
+              data-goal="wiecej"
+              data-label="Jeść więcej"
+              aria-pressed="false"
+            >
+              <span class="goal-icon">🥦</span>
+              <span class="goal-copy">
+                <strong>Jeść więcej</strong>
+                <small>Wybieram coś, co dodaję do diety.</small>
+              </span>
+              <span class="goal-check">✓</span>
+            </button>
+
+            <button
+              class="goal-card"
+              type="button"
+              data-goal="energia"
+              data-label="Więcej energii"
+              aria-pressed="false"
+            >
+              <span class="goal-icon">✨</span>
+              <span class="goal-copy">
+                <strong>Więcej energii</strong>
+                <small>Chcę lepiej się czuć każdego dnia.</small>
+              </span>
+              <span class="goal-check">✓</span>
+            </button>
+          </div>
+
+          <div id="productBox" class="product-box hidden" aria-live="polite">
+            <label class="field field-inline" for="productInput">
+              <span>Co chcesz jeść więcej?</span>
+              <input id="productInput" type="text" placeholder="np. warzyw, owoców, jajek" />
+            </label>
+          </div>
+        </section>
+
+        <div class="selected-summary" id="selectedSummary" aria-live="polite">
+          Wybrane cele: Schudnąć
+        </div>
+
+        <p class="footer-note">
+          <span class="heart-badge">❤</span>
+          Bez presji. Wybierasz jeden cel, reszta to Twoje tempo.
+        </p>
+
+        <button class="cta-button" type="button">Zapisz cel</button>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
