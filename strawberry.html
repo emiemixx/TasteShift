@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truskawki — smak lata</title>
+    <style>
+      :root {
+        --rose: #ff4d6d;
+        --rose-dark: #d93d5f;
+        --berry: #7f1d3b;
+        --peach: #ffd6a5;
+        --cream: #fffaf4;
+        --green: #2e7d32;
+        --text: #2d2a2a;
+        --muted: #6e6a6a;
+        --shadow: 0 16px 35px rgba(127, 29, 59, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #fffaf5 0%, #fff7fa 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(255, 250, 244, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(127, 29, 59, 0.08);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 72px;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--berry);
+        letter-spacing: 0.04em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .nav-links a {
+        opacity: 0.8;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+        color: var(--rose);
+      }
+
+      .btn {
+        display: inline-block;
+        border: none;
+        border-radius: 999px;
+        padding: 0.9rem 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--rose), #ff7a8d);
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero {
+        padding: 72px 0 40px;
+      }
+
+      .hero-wrap {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffe5eb;
+        color: var(--berry);
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 18px 0 20px;
+        font-size: clamp(2.6rem, 5vw, 5rem);
+        line-height: 1.02;
+        letter-spacing: -0.05em;
+      }
+
+      .subtitle {
+        font-size: 1.08rem;
+        max-width: 620px;
+        color: var(--muted);
+        margin-bottom: 28px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--berry);
+        border: 1px solid rgba(127, 29, 59, 0.15);
+        box-shadow: var(--shadow);
+      }
+
+      .stats {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+      }
+
+      .stat {
+        min-width: 130px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.7rem;
+        color: var(--berry);
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .fruit-card {
+        background: linear-gradient(180deg, #fff9f4 0%, #ffe8ee 100%);
+        border: 1px solid rgba(255, 77, 109, 0.15);
+        border-radius: 36px;
+        box-shadow: var(--shadow);
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .fruit-card::before {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        background: rgba(255, 202, 216, 0.5);
+        border-radius: 50%;
+        top: -60px;
+        right: -40px;
+      }
+
+      .fruit-image {
+        position: relative;
+        background: radial-gradient(circle at 30% 30%, #ffb3c6 0%, #ff7a8d 35%, #d93d5f 100%);
+        border-radius: 28px;
+        min-height: 440px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .berry {
+        position: relative;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle at 30% 30%, #ff5d7d 0%, #ff436f 32%, #b30f42 100%);
+        border-radius: 50%;
+        box-shadow: inset -18px -18px 28px rgba(95, 10, 29, 0.25), inset 18px 18px 16px rgba(255, 255, 255, 0.25);
+      }
+
+      .berry::before,
+      .berry::after {
+        content: "";
+        position: absolute;
+        width: 32px;
+        height: 120px;
+        background: linear-gradient(180deg, #5d8d46 0%, #355f2b 100%);
+        border-radius: 20px;
+        top: -92px;
+        left: 50%;
+        transform: translateX(-50%) rotate(12deg);
+      }
+
+      .berry::after {
+        transform: translateX(-50%) rotate(-12deg);
+        left: 42%;
+      }
+
+      .leaf {
+        position: absolute;
+        width: 86px;
+        height: 54px;
+        background: linear-gradient(135deg, #6bcf6f 0%, #2d9b42 100%);
+        border-radius: 60% 0 60% 0;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-20deg);
+      }
+
+      .leaf::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+        border-radius: inherit;
+      }
+
+      .badge {
+        position: absolute;
+        right: 20px;
+        bottom: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--berry);
+        padding: 0.8rem 1rem;
+        border-radius: 18px;
+        font-weight: 700;
+        box-shadow: var(--shadow);
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .section-heading {
+        text-align: center;
+        margin-bottom: 22px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin: 0 0 12px;
+        letter-spacing: -0.04em;
+      }
+
+      .section-heading p {
+        margin: 0 auto;
+        max-width: 700px;
+        color: var(--muted);
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .feature-card {
+        background: white;
+        border: 1px solid rgba(127, 29, 59, 0.08);
+        border-radius: 26px;
+        padding: 28px 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .icon {
+        width: 62px;
+        height: 62px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        font-size: 1.8rem;
+        background: linear-gradient(135deg, #ffe0e7, #ffd4a9);
+        margin-bottom: 18px;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .showcase {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 34px;
+      }
+
+      .showcase-item {
+        background: white;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(127, 29, 59, 0.08);
+      }
+
+      .photo {
+        height: 230px;
+        background: linear-gradient(135deg, #fef0f3 0%, #ffd0d0 100%);
+        position: relative;
+      }
+
+      .photo:nth-child(1) {
+        background: linear-gradient(135deg, #ffe2ec 0%, #ffd5a3 100%);
+      }
+
+      .photo:nth-child(2) {
+        background: linear-gradient(135deg, #ffe7f1 0%, #ffc9d8 100%);
+      }
+
+      .photo:nth-child(3) {
+        background: linear-gradient(135deg, #fff1d2 0%, #ffc5c5 100%);
+      }
+
+      .photo::before {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle at 30% 30%, #ff8ca8 0%, #ff506d 35%, #b3124d 100%);
+        box-shadow:
+          -40px 26px 0 -22px rgba(255, 255, 255, 0.2),
+          38px -22px 0 -28px rgba(255, 255, 255, 0.18);
+      }
+
+      .photo::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 90px;
+        left: 52%;
+        top: 30%;
+        transform: translateX(-50%) rotate(18deg);
+        background: linear-gradient(180deg, #5ccf67 0%, #2e8b42 100%);
+        border-radius: 20px;
+      }
+
+      .showcase-text {
+        padding: 18px 18px 22px;
+      }
+
+      .showcase-text h3 {
+        margin: 0 0 8px;
+        font-size: 1.2rem;
+      }
+
+      .showcase-text p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .cta {
+        background: linear-gradient(135deg, #fff0f3 0%, #ffeecf 100%);
+        border-radius: 32px;
+        padding: 42px 34px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(127, 29, 59, 0.08);
+      }
+
+      .cta h2 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 4vw, 3rem);
+      }
+
+      .cta p {
+        margin: 0 auto 24px;
+        max-width: 660px;
+        color: var(--muted);
+      }
+
+      footer {
+        padding: 28px 0 50px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        .hero-wrap,
+        .features,
+        .showcase {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo">🍓 Truskawki</div>
+        <nav class="nav-links">
+          <a href="#o-nas">O nas</a>
+          <a href="#benefits">Korzyści</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+        <a href="#kontakt" class="btn btn-primary">Zamów teraz</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-wrap">
+          <div>
+            <div class="eyebrow">🌞 Sezonowe smaki</div>
+            <h1>Najbardziej soczyste truskawki w sezonie.</h1>
+            <p class="subtitle">
+              Truskawki to nie tylko pyszny owoc — to zapach lata, zdrowie, energia
+              i chwile pełne radości. Wybieraj naturalność, świeżość i najlepszy smak.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#galeria" class="btn btn-primary">Zobacz więcej</a>
+              <a href="#o-nas" class="btn btn-secondary">Dowiedz się więcej</a>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <strong>100%</strong>
+                <span>naturalne</span>
+              </div>
+              <div class="stat">
+                <strong>4.9/5</strong>
+                <span>oceny klientów</span>
+              </div>
+              <div class="stat">
+                <strong>24h</strong>
+                <span>świeżości</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="fruit-card">
+              <div class="fruit-image">
+                <div class="leaf"></div>
+                <div class="berry"></div>
+                <div class="badge">Świeże od lokalnych producentów</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="o-nas">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Dlaczego truskawki są wyjątkowe?</h2>
+            <p>
+              Ich słodki smak, intensywny aromat i bogactwo witamin sprawiają,
+              że truskawki są ulubionym owocem wielu osób na całym świecie.
+            </p>
+          </div>
+
+          <div class="features" id="benefits">
+            <article class="feature-card">
+              <div class="icon">🍓</div>
+              <h3>Niepowtarzalny smak</h3>
+              <p>
+                Słodkie, soczyste i lekko kwaskowe — idealne do deserów, smoothie
+                i zdrowych przekąsek.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <div class="icon">💪</div>
+              <h3>Zdrowe i odżywcze</h3>
+              <p>
+                Źródło witaminy C, błonnika i przeciwutleniaczy wspierających
+                odporność i dobre samopoczucie.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <div class="icon">🌼</div>
+              <h3>Sezonowy radość</h3>
+              <p>
+                Ich sezon trwa najczęściej od wiosny do lata, więc każda porcja
+                niesie ze sobą smak wakacji.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Nasza ulubiona truskawkowa galeria</h2>
+            <p>
+              Owoce, które zachwycają wyglądem i zapachem — od małych, soczystych
+              po duże, aromatyczne.
+            </p>
+          </div>
+
+          <div class="showcase">
+            <article class="showcase-item">
+              <div class="photo"></div>
+              <div class="showcase-text">
+                <h3>Świeże i soczyste</h3>
+                <p>Naturalny smak prosto z pola.</p>
+              </div>
+            </article>
+
+            <article class="showcase-item">
+              <div class="photo"></div>
+              <div class="showcase-text">
+                <h3>Idealne do deserów</h3>
+                <p>Na ciasta, lody i lekkie smoothie.</p>
+              </div>
+            </article>
+
+            <article class="showcase-item">
+              <div class="photo"></div>
+              <div class="showcase-text">
+                <h3>Wakacyjny aromat</h3>
+                <p>Zapach lata w każdej porcji.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakt">
+        <div class="container">
+          <div class="cta">
+            <h2>Odkryj smak truskawek na nowo</h2>
+            <p>
+              Truskawki są idealne na przekąskę, do deserów, smoothies i domowych
+              wypieków. Wybierz świeżość, jakość i naturalny aromat.
+            </p>
+            <a href="mailto:hello@truskawki.pl" class="btn btn-primary">hello@truskawki.pl</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        © <span id="year"></span> Truskawki — smak lata
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
