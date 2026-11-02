@@ -1,6 +1,3 @@
-Masz rację — poniżej wklejam **cały kod** najnowszej wersji. Skopiuj go w całości i zapisz jako `TasteShift.html`.
-
-```html
 <!DOCTYPE html>
 <html lang="pl">
   <head>
@@ -27,9 +24,7 @@ Masz rację — poniżej wklejam **cały kod** najnowszej wersji. Skopiuj go w c
         margin: 0;
         min-height: 100%;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background:
-          radial-gradient(circle at top left, rgba(255,255,255,0.09), transparent 18%),
-          linear-gradient(135deg, var(--dark-green) 0%, var(--green-deep) 42%, var(--green-soft) 100%);
+        background: #ffffff;
         color: var(--white);
       }
 
@@ -43,7 +38,9 @@ Masz rację — poniżej wklejam **cały kod** najnowszej wersji. Skopiuj go w c
       .page {
         width: min(1220px, 100%);
         min-height: 760px;
-        background: rgba(255,255,255,0.04);
+        background:
+          radial-gradient(circle at top left, rgba(255,255,255,0.09), transparent 18%),
+          linear-gradient(135deg, var(--dark-green) 0%, var(--green-deep) 42%, var(--green-soft) 100%);
         border: 1px solid rgba(255,255,255,0.12);
         border-radius: 34px;
         box-shadow: 0 28px 60px rgba(0,0,0,0.18);
@@ -241,12 +238,12 @@ Masz rację — poniżej wklejam **cały kod** najnowszej wersji. Skopiuj go w c
       }
 
       .empty-card {
-        width: min(410px, 90%);
-        height: 400px;
+        width: min(395px, 88%);
+        height: 385px;
         border-radius: 32px;
-        background: rgba(224, 207, 180, 0.3);
-        border: 1px solid rgba(241, 225, 199, 0.38);
-        box-shadow: inset 0 0 18px rgba(241, 225, 199, 0.1);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.04);
         display: flex;
         align-items: flex-start;
         justify-content: center;
@@ -308,8 +305,8 @@ Masz rację — poniżej wklejam **cały kod** najnowszej wersji. Skopiuj go w c
         }
 
         .empty-card {
-          width: min(360px, 82%);
-          height: 240px;
+          width: min(350px, 80%);
+          height: 230px;
         }
       }
 
@@ -466,4 +463,3 @@ Masz rację — poniżej wklejam **cały kod** najnowszej wersji. Skopiuj go w c
     </script>
   </body>
 </html>
-```
