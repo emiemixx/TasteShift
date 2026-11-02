@@ -6,13 +6,13 @@
     <title>TasteShift</title>
     <style>
       :root {
-        --dark-green: #102f2a;
-        --green-deep: #163f38;
-        --green-soft: #234f4a;
+        --dark-green: #2c554b;
+        --green-deep: #37665a;
+        --green-soft: #4a786b;
         --beige: #f3e7d9;
         --beige-strong: #e5d3b5;
         --white: #ffffff;
-        --text-soft: #dfeae6;
+        --text-soft: #dde9e6;
         --shadow: rgba(12, 28, 23, 0.22);
       }
 
@@ -20,27 +20,32 @@
         box-sizing: border-box;
       }
 
-      body {
+      html, body {
         margin: 0;
-        min-height: 100vh;
+        min-height: 100%;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background:
-          radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
-          linear-gradient(135deg, var(--dark-green) 0%, var(--green-deep) 45%, var(--green-soft) 100%);
+          radial-gradient(circle at top left, rgba(255,255,255,0.09), transparent 18%),
+          linear-gradient(135deg, var(--dark-green) 0%, var(--green-deep) 42%, var(--green-soft) 100%);
         color: var(--white);
-        display: grid;
-        place-items: center;
       }
 
-      .wrapper {
-        width: min(1200px, 90vw);
-        min-height: 740px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 32px;
-        box-shadow: 0 25px 60px var(--shadow);
-        padding: 26px 30px 40px;
-        backdrop-filter: blur(6px);
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+      }
+
+      .page {
+        width: min(1220px, 100%);
+        min-height: 760px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 34px;
+        box-shadow: 0 28px 60px rgba(0,0,0,0.18);
+        backdrop-filter: blur(4px);
+        padding: 28px 38px 42px;
       }
 
       .topbar {
@@ -48,10 +53,11 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
+        z-index: 4;
       }
 
       .brand {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
         font-weight: 800;
         letter-spacing: 0.04em;
         color: var(--beige);
@@ -61,20 +67,20 @@
         color: var(--white);
       }
 
-      .settings {
+      .settings-wrap {
         position: relative;
       }
 
       .dots-button {
-        width: 56px;
-        height: 56px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.14);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 4px;
         cursor: pointer;
         transition: transform 0.2s ease, background 0.2s ease;
       }
@@ -85,8 +91,8 @@
       }
 
       .dots-button span {
-        width: 7px;
-        height: 7px;
+        width: 5px;
+        height: 5px;
         border-radius: 50%;
         background: var(--beige);
         display: block;
@@ -94,14 +100,14 @@
 
       .panel {
         position: absolute;
-        top: 72px;
+        top: 60px;
         right: 0;
-        width: 270px;
+        width: 260px;
         background: rgba(255,255,255,0.94);
         color: var(--dark-green);
         border-radius: 20px;
-        box-shadow: 0 18px 28px rgba(0,0,0,0.18);
-        padding: 18px 16px;
+        box-shadow: 0 18px 32px rgba(0,0,0,0.18);
+        padding: 14px 12px;
         display: none;
       }
 
@@ -110,35 +116,36 @@
       }
 
       .panel h3 {
-        margin: 0 0 14px;
-        font-size: 1rem;
+        margin: 0 0 10px;
+        font-size: 0.9rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
         color: var(--dark-green);
-        letter-spacing: 0.03em;
       }
 
       .option {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
-        padding: 10px 8px;
+        gap: 12px;
+        padding: 8px 6px;
         border-radius: 12px;
         transition: background 0.2s ease;
       }
 
       .option:hover {
-        background: rgba(16, 47, 42, 0.06);
+        background: rgba(16, 47, 42, 0.05);
       }
 
       .option label {
-        font-size: 0.95rem;
-        font-weight: 600;
+        font-size: 0.88rem;
+        font-weight: 700;
       }
 
       .switch {
         position: relative;
-        width: 46px;
-        height: 28px;
+        width: 40px;
+        height: 24px;
         display: inline-block;
       }
 
@@ -151,7 +158,7 @@
       .slider {
         position: absolute;
         inset: 0;
-        background: #d8dadd;
+        background: #d7dadd;
         border-radius: 999px;
         transition: 0.2s ease;
       }
@@ -159,13 +166,13 @@
       .slider::before {
         content: "";
         position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 4px;
-        top: 4px;
-        background: white;
+        width: 18px;
+        height: 18px;
+        left: 3px;
+        top: 3px;
         border-radius: 50%;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         transition: 0.2s ease;
       }
 
@@ -174,242 +181,175 @@
       }
 
       .switch input:checked + .slider::before {
-        transform: translateX(18px);
+        transform: translateX(16px);
       }
 
       .hero {
         display: grid;
         grid-template-columns: 1.1fr 0.9fr;
         align-items: center;
-        gap: 24px;
+        gap: 18px;
         min-height: 640px;
-        padding-top: 18px;
+        padding-top: 24px;
       }
 
-      .eyebrow {
-        display: inline-block;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.13);
-        color: var(--beige);
-        font-size: 0.85rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 22px;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.8rem, 5vw, 5rem);
-        line-height: 1.02;
-        letter-spacing: -0.05em;
-        max-width: 700px;
-      }
-
-      .emoji {
-        display: inline-block;
-        transform: translateY(-6px);
+      .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 10px;
       }
 
       .subtitle {
-        margin-top: 22px;
+        margin: 22px 0 0;
         max-width: 560px;
-        font-size: 1.2rem;
+        font-size: 1.18rem;
         line-height: 1.6;
         color: var(--text-soft);
       }
 
       .cta {
-        margin-top: 28px;
+        margin-top: 30px;
+        width: fit-content;
+        min-width: 220px;
         border: none;
-        background: linear-gradient(135deg, var(--beige) 0%, #d6b189 100%);
-        color: var(--dark-green);
-        font-weight: 800;
-        font-size: 1.08rem;
-        padding: 18px 42px;
         border-radius: 999px;
+        padding: 18px 36px;
+        background: linear-gradient(135deg, var(--beige) 0%, var(--beige-strong) 100%);
+        color: var(--dark-green);
+        font-size: 1.08rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
         cursor: pointer;
-        box-shadow: 0 10px 24px rgba(232, 208, 176, 0.28);
+        box-shadow: 0 12px 28px rgba(228, 205, 170, 0.28);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
       .cta:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 28px rgba(232, 208, 176, 0.35);
+        box-shadow: 0 16px 30px rgba(228, 205, 170, 0.34);
       }
 
-      .visual {
+      .right {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        min-height: 520px;
       }
 
-      .food-card {
-        width: min(430px, 90%);
-        border-radius: 30px;
-        padding: 24px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-      }
-
-      .plate {
-        position: relative;
+      .empty-card {
+        width: min(440px, 90%);
         height: 430px;
-        background: radial-gradient(circle at 50% 40%, #fff9f0 0%, #f3e7d9 30%, #e4d0af 62%, #d1af8f 100%);
-        border-radius: 50%;
-        border: 18px solid rgba(255,255,255,0.4);
-        overflow: hidden;
+        border-radius: 32px;
+        background: rgba(224, 207, 180, 0.3);
+        border: 1px solid rgba(241, 225, 199, 0.38);
+        box-shadow: inset 0 0 18px rgba(241, 225, 199, 0.1);
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        padding: 32px;
       }
 
-      .leaf, .leaf::before, .leaf::after {
-        position: absolute;
-        background: linear-gradient(135deg, #8abf67, #b6d788);
-        border-radius: 60% 0 60% 0;
-        transform: rotate(26deg);
+      .card-content {
+        width: 100%;
+        text-align: center;
       }
 
-      .leaf {
-        width: 110px;
-        height: 140px;
-        right: 110px;
-        top: 90px;
-        box-shadow: inset 0 0 18px rgba(255,255,255,0.2);
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 3vw, 3.3rem);
+        line-height: 1.05;
+        letter-spacing: -0.06em;
       }
 
-      .leaf::before {
-        content: "";
-        width: 90px;
-        height: 118px;
-        top: 20px;
-        left: -50px;
-        transform: rotate(-28deg);
+      .emoji {
+        display: inline-block;
+        margin-left: 8px;
       }
 
-      .leaf::after {
-        content: "";
-        width: 80px;
-        height: 104px;
-        bottom: 6px;
-        right: -30px;
-        transform: rotate(46deg);
-      }
-
-      .fruit {
-        position: absolute;
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #f6d4a4, #ef9d68);
-        box-shadow: inset -16px -10px 30px rgba(125, 66, 28, 0.18);
-      }
-
-      .fruit.one {
-        left: 78px;
-        bottom: 78px;
-      }
-
-      .fruit.two {
-        left: 170px;
-        bottom: 130px;
-        width: 102px;
-        height: 102px;
-        background: linear-gradient(135deg, #ed8a60, #d86945);
-      }
-
-      .fruit.three {
-        right: 82px;
-        bottom: 90px;
-        width: 116px;
-        height: 116px;
-        background: linear-gradient(135deg, #f0cf7c, #d6a94d);
-      }
-
-      .small-card {
+      .inside-copy {
         margin-top: 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255,255,255,0.14);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 18px;
-        padding: 12px 16px;
-        color: var(--beige);
-      }
-
-      .small-card strong {
-        display: block;
-        color: var(--white);
-        font-size: 1rem;
-      }
-
-      .small-card span {
-        font-size: 0.85rem;
+        font-size: 1.05rem;
+        line-height: 1.6;
         color: var(--text-soft);
       }
 
-      @media (max-width: 900px) {
-        .wrapper {
-          padding: 20px 20px 32px;
+      @media (max-width: 950px) {
+        .page {
+          padding: 24px 22px 30px;
         }
 
         .hero {
           grid-template-columns: 1fr;
           text-align: center;
+          padding-top: 18px;
+        }
+
+        .left {
+          padding-left: 0;
+          align-items: center;
         }
 
         .subtitle {
-          margin-left: auto;
-          margin-right: auto;
+          max-width: 620px;
         }
 
         .cta {
           width: 100%;
+          max-width: 280px;
         }
 
-        .visual {
+        .right {
           order: -1;
+          min-height: 360px;
+        }
+
+        .empty-card {
+          width: min(380px, 82%);
+          height: 260px;
         }
       }
 
-      @media (max-width: 520px) {
+      @media (max-width: 560px) {
+        body {
+          padding: 16px;
+        }
+
+        .page {
+          min-height: auto;
+          padding: 18px 16px 24px;
+        }
+
         .brand {
-          font-size: 1.35rem;
+          font-size: 1.4rem;
         }
 
         .dots-button {
-          width: 50px;
-          height: 50px;
+          width: 44px;
+          height: 44px;
         }
 
         h1 {
-          font-size: 2.5rem;
+          font-size: 2.3rem;
         }
 
         .subtitle {
           font-size: 1rem;
         }
 
-        .food-card {
+        .cta {
+          min-width: 0;
           width: 100%;
-        }
-
-        .plate {
-          height: 330px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="page">
       <header class="topbar">
         <div class="brand">Taste<span>Shift</span></div>
 
-        <div class="settings">
+        <div class="settings-wrap">
           <button class="dots-button" id="menuToggle" aria-label="Ustawienia">
             <span></span>
             <span></span>
@@ -420,7 +360,7 @@
             <h3>Tryb i styl</h3>
 
             <div class="option">
-              <label for="sarcasm">Sarkazm</label>
+              <label for="sarcasm">Sarkastycznie</label>
               <label class="switch">
                 <input type="checkbox" id="sarcasm" checked />
                 <span class="slider"></span>
@@ -428,7 +368,7 @@
             </div>
 
             <div class="option">
-              <label for="kind">Bycie miłym</label>
+              <label for="kind">Uprzejmie</label>
               <label class="switch">
                 <input type="checkbox" id="kind" checked />
                 <span class="slider"></span>
@@ -436,17 +376,25 @@
             </div>
 
             <div class="option">
-              <label for="pressure">Ciśnienie na maksa</label>
+              <label for="motivation">Konkretnie</label>
               <label class="switch">
-                <input type="checkbox" id="pressure" />
+                <input type="checkbox" id="motivation" checked />
                 <span class="slider"></span>
               </label>
             </div>
 
             <div class="option">
-              <label for="motivation">Motywacja</label>
+              <label for="educational">Edukacyjnie</label>
               <label class="switch">
-                <input type="checkbox" id="motivation" checked />
+                <input type="checkbox" id="educational" />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="option">
+              <label for="neutral">Neutralnie</label>
+              <label class="switch">
+                <input type="checkbox" id="neutral" />
                 <span class="slider"></span>
               </label>
             </div>
@@ -455,36 +403,24 @@
       </header>
 
       <main class="hero">
-        <section>
-          <div class="eyebrow">zdrowe wybory, bez chaosu</div>
-          <h1>
-            Witaj w TasteShift!<br />
-            Razem zadbamy o Twoją żywność! <span class="emoji">😄</span>
-          </h1>
-
+        <section class="left">
           <p class="subtitle">
-            Lepiej jedz, lepiej się czujesz i łatwiej utrzymujesz nawyki —
-            bez stresu, bez wyrzutów i bez „jutro zaczynam od nowa”.
+            Razem zadbamy o Twoje odżywianie i nawyki — bez presji, wyrzutów sumienia
+            i „jutro zaczynam od nowa”. W Twoim tempie i na Twoich zasadach.
           </p>
 
           <button class="cta">Zaczynamy!</button>
         </section>
 
-        <section class="visual" aria-label="Ilustracja jedzenia">
-          <div class="food-card">
-            <div class="plate">
-              <div class="leaf"></div>
-              <div class="fruit one"></div>
-              <div class="fruit two"></div>
-              <div class="fruit three"></div>
-            </div>
-
-            <div class="small-card">
-              <div>
-                <strong>Twoje API zdrowego rytmu</strong>
-                <span>smacznie, sensownie i bez przymusu</span>
+        <section class="right" aria-label="Witaj w TasteShift">
+          <div class="empty-card">
+            <div class="card-content">
+              <h1>
+                Witaj w TasteShift! <span class="emoji">😎</span>
+              </h1>
+              <div class="inside-copy">
+                Razem zadbamy o Twoją żywność!
               </div>
-              <div>🥗</div>
             </div>
           </div>
         </section>
@@ -494,13 +430,33 @@
     <script>
       const toggle = document.getElementById("menuToggle");
       const panel = document.getElementById("settingsPanel");
+      const neutral = document.getElementById("neutral");
+      const otherOptions = panel.querySelectorAll(
+        'input[type="checkbox"]:not(#neutral)'
+      );
 
-      toggle.addEventListener("click", () => {
+      neutral.addEventListener("change", function () {
+        if (neutral.checked) {
+          otherOptions.forEach(function (option) {
+            option.checked = false;
+          });
+        }
+      });
+
+      otherOptions.forEach(function (option) {
+        option.addEventListener("change", function () {
+          if (option.checked) {
+            neutral.checked = false;
+          }
+        });
+      });
+
+      toggle.addEventListener("click", function () {
         panel.classList.toggle("open");
       });
 
-      document.addEventListener("click", (event) => {
-        if (!event.target.closest(".settings")) {
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".settings-wrap")) {
           panel.classList.remove("open");
         }
       });
