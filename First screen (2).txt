@@ -16,7 +16,7 @@
         --green-dark: #19452d;
         --green-mid: #5b9669;
         --green-soft: #eaf3e8;
-        --green-pale: #f5f8f2;
+        --green-pale: #e8eee1;
         --ink: #26332a;
         --muted: #748078;
         --line: #e7ece5;
@@ -35,7 +35,8 @@
         margin: 0;
         color: var(--ink);
         background:
-          radial-gradient(ellipse at 86% 16%, rgba(221, 237, 216, 0.62), transparent 34rem),
+          radial-gradient(ellipse at 86% 16%, rgba(205, 222, 192, 0.7), transparent 34rem),
+          radial-gradient(ellipse at 10% 88%, rgba(233, 218, 190, 0.48), transparent 32rem),
           var(--green-pale);
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.5;
@@ -612,7 +613,7 @@
         <section class="form-card" aria-labelledby="form-title">
           <div class="form-heading">
             <h2 id="form-title">Zacznijmy od Twojego celu</h2>
-            <p>Zaznacz jeden lub kilka celów, które są dla Ciebie ważne.</p>
+            <p>Zaznacz maksymalnie 3 cele, które są dla Ciebie ważne.</p>
           </div>
 
           <form id="goal-form">
@@ -719,6 +720,7 @@
       const productField = document.getElementById("product-field");
       const productInput = document.getElementById("favorite-product");
       const feedback = document.getElementById("feedback");
+      const maxGoals = 3;
 
       function updateProductField() {
         const selectedGoals = form.querySelectorAll('input[name="goal"]:checked');
@@ -741,6 +743,15 @@
 
       form.addEventListener("change", (event) => {
         if (event.target.name === "goal") {
+          const selectedGoals = form.querySelectorAll('input[name="goal"]:checked');
+          if (event.target.checked && selectedGoals.length > maxGoals) {
+            event.target.checked = false;
+            updateProductField();
+            feedback.textContent = "Możesz zaznaczyć maksymalnie 3 cele.";
+            feedback.classList.add("error");
+            return;
+          }
+
           updateProductField();
         }
       });
@@ -752,6 +763,12 @@
         const selectedGoals = Array.from(
           form.querySelectorAll('input[name="goal"]:checked')
         );
+        if (selectedGoals.length > maxGoals) {
+          feedback.textContent = "Możesz zaznaczyć maksymalnie 3 cele.";
+          feedback.classList.add("error");
+          return;
+        }
+
         if (selectedGoals.length === 0) {
           feedback.textContent = "Wybierz przynajmniej jeden cel, aby przejść dalej.";
           feedback.classList.add("error");
