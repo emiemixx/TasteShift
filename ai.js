@@ -6,6 +6,9 @@
   "use strict";
 
   const AI_WORKER_URL = "https://tasteshift.emilxa2009.workers.dev";
+  // DEBUG = true: gdy AI nie odpowie, w czacie pojawi się krótka informacja dlaczego.
+  // Gdy wszystko działa, zmień na false.
+  const DEBUG = true;
   let history = [];
 
   // Jeśli strona nie ma oczekiwanych funkcji, nic nie rób (czat działa po staremu).
@@ -61,7 +64,11 @@
         }),
         signal: controller.signal
       });
-      if (!res.ok) throw new Error("HTTP " + res.status);
+      if (!res.ok) {
+        let detail = "";
+        try { detail = (await res.text()).slice(0, 160); } catch (e) {}
+        throw new Error("HTTP " + res.status + (detail ? " — " + detail : ""));
+      }
       const data = await res.json();
       const text = data.choices && data.choices[0] && data.choices[0].message &&
         data.choices[0].message.content && data.choices[0].message.content.trim();
@@ -104,6 +111,10 @@
       reply = await askAI(message);
     } catch (err) {
       console.error("AI niedostępne, odpowiedź lokalna:", err);
+      if (DEBUG) {
+        const reason = err && err.name === "AbortError" ? "przekroczono czas oczekiwania" : (err && err.message) || "nieznany błąd";
+        addChatMessage("[Diagnostyka] AI nie odpowiedziało: " + reason, "mascot");
+      }
       reply = addChatStyle(answerFoodQuestion(message));
     }
 
