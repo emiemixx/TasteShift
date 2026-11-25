@@ -71,8 +71,8 @@ const AI_WORKER_URL = "https://orzeszek-backend.vercel.app/api/chat";
 }
 
   // Faza przechwytywania na document: nasz handler odpala PRZED starym i go blokuje.
-  document.addEventListener("submit", async function (event) {
-    if (!event.target || event.target.id !== "chatForm") return;
+  document.addEventListener("submit", async function (event) { 
+   if (!event.target || event.target.id !== "chatForm") return;
     event.stopImmediatePropagation();
     event.preventDefault();
 
