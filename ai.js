@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const AI_WORKER_URL = "https://tasteshift.emilxa2009.workers.dev";
+  const AI_WORKER_URL = "https://orzeszek-backend.vercel.app/api/chat";
   // DEBUG = true: gdy AI nie odpowie, w czacie pojawi się krótka informacja dlaczego.
   // Gdy wszystko działa, zmień na false.
   const DEBUG = true;
