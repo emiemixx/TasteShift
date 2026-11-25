@@ -49,39 +49,26 @@ const AI_WORKER_URL = "https://orzeszek-backend.vercel.app/api/chat";
     );
   }
 
-  async function askAI(userText) {
-    history.push({ role: "user", content: userText });
+  const data = await res.json();
+    const text = data.reply;
+
+    if (typeof text !== "string" || !text.trim()) {
+      throw new Error("Backend nie zwrócił odpowiedzi.");
+    }
+
+    history.push(
+      { role: "user", content: userText },
+      { role: "assistant", content: text.trim() }
+    );
+
     history = history.slice(-10);
 
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 20000);
-    try {
-      const res = await fetch(AI_WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [{ role: "system", content: systemPrompt() }].concat(history)
-        }),
-        signal: controller.signal
-      });
-      if (!res.ok) {
-        let detail = "";
-        try { detail = (await res.text()).slice(0, 160); } catch (e) {}
-        throw new Error("HTTP " + res.status + (detail ? " — " + detail : ""));
-      }
-      const data = await res.json();
-      const text = data.choices && data.choices[0] && data.choices[0].message &&
-        data.choices[0].message.content && data.choices[0].message.content.trim();
-      if (!text) throw new Error("Pusta odpowiedź");
-      history.push({ role: "assistant", content: text });
-      return text;
-    } catch (err) {
-      history.pop(); // usuń pytanie, na które nie było odpowiedzi
-      throw err;
-    } finally {
-      clearTimeout(timer);
-    }
+    return text.trim();
+
+  } finally {
+    clearTimeout(timer);
   }
+}
 
   // Faza przechwytywania na document: nasz handler odpala PRZED starym i go blokuje.
   document.addEventListener("submit", async function (event) {
